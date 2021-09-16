@@ -21,7 +21,7 @@ public class ClienteRMI {
         Scanner sc = new Scanner(System.in);
     try{
         Registry miRegistro = LocateRegistry.getRegistry("localhost", 1099);
-        ofertas o = (ofertas) Naming.lookup("//localhost/ofertas");
+        ofertas o = (ofertas) Naming.lookup("//192.168.100.137/ofertas");
         while(true){
             System.out.println("Que opcion desea:\n"
                     + "1) Agregar oferta\n"

@@ -10,6 +10,7 @@ import java.rmi.Naming;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 import java.util.Scanner;
 /**
  *
@@ -19,14 +20,32 @@ public class ClienteRMI {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
     try{
-        Registry miRegistro = LocateRegistry.getRegistry("localhost", 1100);
-        ofertas o = (ofertas) Naming.lookup("ofertas");
+        Registry miRegistro = LocateRegistry.getRegistry("localhost", 1099);
+        ofertas o = (ofertas) Naming.lookup("//localhost/ofertas");
         while(true){
             System.out.println("Que opcion desea:\n"
                     + "1) Agregar oferta\n"
-                    + "2) Mostrar todas las ofertas\n");
-            System.out.print("Seleccione una opcion");
-            String respuesta = sc.nextLine();
+                    + "2) Consultar todas las ofertas\n"
+                    + "3) Salir");
+            System.out.print("Seleccione una opcion: ");
+            int opcion = sc.nextInt();
+            switch(opcion){
+                case 1:
+                    System.out.println("-------------------------------");
+                    System.out.println("Ingrese el nombre del registro : ");
+                    String nombre = sc.next();
+                    o.registrar(nombre);
+                    break;
+                case 2:
+                    System.out.println("Todas las ofertas son: ");
+                    List<String> ofertas = o.consultar();
+                    for(int i = 0; i < ofertas.size(); i++)
+                        System.out.println(" " + (i+1) +") " + ofertas.get(i));
+                    System.out.println("-------------------------------");
+                    break;
+                case 3:
+                    return;
+            }
         }
     }catch(Exception e){
         System.out.println("Servidor no Encontrado");

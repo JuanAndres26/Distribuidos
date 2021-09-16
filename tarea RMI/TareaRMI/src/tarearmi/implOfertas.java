@@ -27,9 +27,8 @@ public class implOfertas extends UnicastRemoteObject implements ofertas {
     }
 
     @Override
-    public void consultar() throws RemoteException {
-        for(int i = 0; i < ofertas.size(); i++)
-            System.out.println(" " + i +") " + ofertas.get(i));
+    public List consultar() throws RemoteException {
+        return ofertas;
     }
     
 }

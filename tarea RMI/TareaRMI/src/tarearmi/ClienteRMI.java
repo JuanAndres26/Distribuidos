@@ -23,8 +23,9 @@ public class ClienteRMI {
         Oferta of = new Oferta();
     try{
         Registry miRegistro = LocateRegistry.getRegistry("localhost", 1099);
-        ofertas o = (ofertas) Naming.lookup("//192.168.100.137/ofertas");
+        ofertas o = (ofertas) Naming.lookup("//192.168.0.14/ofertas");
         while(true){
+            System.out.println("-------------------------------");
             System.out.println("Que opcion desea:\n"
                     + "1) Agregar oferta\n"
                     + "2) Consultar todas las ofertas\n"
@@ -38,9 +39,10 @@ public class ClienteRMI {
                     int id = sc.nextInt();
                     System.out.println("Ingrese la descripcion de la oferta :");
                     String des = sc.next();
+                    des = des + sc.nextLine();
+                    System.out.println(des);
                     System.out.println("Ingrese el precio :");
-                    double pres =sc.nextDouble();
-                    System.out.println( id+" "+des+" "+pres);
+                    double pres = Double.parseDouble(sc.next());
                     o.registrar(id,des,pres);
                     break;
                 case 2:

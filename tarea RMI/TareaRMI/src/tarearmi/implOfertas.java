@@ -15,19 +15,20 @@ import java.util.List;
  * @author casta
  */
 public class implOfertas extends UnicastRemoteObject implements ofertas {
-    private List<String> ofertas;
+    private ArrayList<Oferta> ofertas;
     public implOfertas() throws RemoteException{
         ofertas = new ArrayList<>();
     }
     
     @Override
-    public void registrar(String nombre) throws RemoteException {
-        ofertas.add(nombre);
+    public void registrar(int id, String descripcion, double precio) throws RemoteException {
+        Oferta of = new Oferta(id,descripcion,precio);
+        ofertas.add(of);
         System.out.println("Se agrego oferta");
     }
 
     @Override
-    public List consultar() throws RemoteException {
+    public ArrayList<Oferta> consultar() throws RemoteException {
         return ofertas;
     }
     

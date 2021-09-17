@@ -10,6 +10,7 @@ import java.rmi.Naming;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -19,6 +20,7 @@ import java.util.Scanner;
 public class ClienteRMI {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Oferta of = new Oferta();
     try{
         Registry miRegistro = LocateRegistry.getRegistry("localhost", 1099);
         ofertas o = (ofertas) Naming.lookup("//192.168.100.137/ofertas");
@@ -32,15 +34,20 @@ public class ClienteRMI {
             switch(opcion){
                 case 1:
                     System.out.println("-------------------------------");
-                    System.out.println("Ingrese el nombre del registro : ");
-                    String nombre = sc.next();
-                    o.registrar(nombre);
+                    System.out.println("Ingrese el id del registro : ");
+                    int id = sc.nextInt();
+                    System.out.println("Ingrese la descripcion de la oferta :");
+                    String des = sc.next();
+                    System.out.println("Ingrese el precio :");
+                    double pres =sc.nextDouble();
+                    System.out.println( id+" "+des+" "+pres);
+                    o.registrar(id,des,pres);
                     break;
                 case 2:
                     System.out.println("Todas las ofertas son: ");
-                    List<String> ofertas = o.consultar();
+                    ArrayList<Oferta> ofertas = o.consultar();
                     for(int i = 0; i < ofertas.size(); i++)
-                        System.out.println(" " + (i+1) +") " + ofertas.get(i));
+                        System.out.println(" " + (i+1) +") " + ofertas.get(i).getId()+" "+ofertas.get(i).getDescripcion()+" "+ofertas.get(i).getPrecio());
                     System.out.println("-------------------------------");
                     break;
                 case 3:
@@ -48,7 +55,7 @@ public class ClienteRMI {
             }
         }
     }catch(Exception e){
-        System.out.println("Servidor no Encontrado");
+        System.out.println("Servidor no Encontrado" + e);
     }
     }
 }

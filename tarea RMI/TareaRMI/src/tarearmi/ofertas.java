@@ -6,12 +6,13 @@
 package tarearmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
  * @author casta
  */
 public interface ofertas extends Remote {
-    public void registrar(String nombre) throws RemoteException;
-    public List consultar() throws RemoteException;
+    public void registrar(int id, String descripcion, double precio) throws RemoteException;
+    public ArrayList<Oferta> consultar() throws RemoteException;
 }

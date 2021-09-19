@@ -46,7 +46,7 @@ public class ServidorRMI {
             r.rebind("ofertas", new implOfertas(cache));
             System.out.println("Esta Corriendo el Servidor.....");
         }catch(Exception e){
-            System.out.println("No prendio el servidor");
+            System.out.println("No prendio el servidor:"+" "+ e);
         }
     }
 }

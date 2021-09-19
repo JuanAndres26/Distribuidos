@@ -22,8 +22,9 @@ public class ClienteRMI {
         Scanner sc = new Scanner(System.in);
         Oferta of = new Oferta();
     try{
+       // System.setProperty("java.rmi.server.hostname", "25.86.91.11");
         Registry miRegistro = LocateRegistry.getRegistry("localhost", 1099);
-        ofertas o = (ofertas) Naming.lookup("//192.168.0.14/ofertas");
+        ofertas o = (ofertas) Naming.lookup("//25.86.91.11/ofertas");
         while(true){
             System.out.println("-------------------------------");
             System.out.println("Que opcion desea:\n"
